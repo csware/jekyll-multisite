@@ -8,7 +8,7 @@ Jekyll doesn't support multiple sites by default. If you want to have multiple s
 Dependencies
 --------
 
-* jekyll v3.0.1
+* jekyll
 
 Installation
 ------------
@@ -133,4 +133,3 @@ Things to note:
 * I had to monkey patch the pagination plugin to work with this setup. This gem auto-detects if you have jekyll-pagination and applies the patch if needed. You may have to adjust other plugins for multi-site support
 * The shared output is actually generated in `_site` and moved after generation is complete
 * This entire plugin is very hacky and does some interesting stuff under the hood to get multi-site working. 
-* Only tested on Jekyll 3.0.1. Other versions will most likely not work.
