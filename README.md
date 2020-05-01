@@ -1,7 +1,7 @@
 jekyll-multisite
 =================
 
-[![Gem](https://img.shields.io/gem/v/jekyll-multisite.svg?style=plastic)]()
+[![Gem Version](https://badge.fury.io/rb/jekyll-multisite.svg)](https://badge.fury.io/rb/jekyll-multisite)
 
 Jekyll doesn't support multiple sites by default. If you want to have multiple sites with shared source code with Jekyll, you'll need to use the [jekyll-unsanitize](https://github.com/sumdog/jekyll-unsanitize) gem plus a ton of ugly symbolic links in your source tree. The following plugin adds support for a shared base that can be used in multiple Jekyll projects.
 
