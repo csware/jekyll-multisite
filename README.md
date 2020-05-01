@@ -19,7 +19,7 @@ To install the current release, run the following:
 
 To install from source:
 
-    git clone https://github.com/sumdog/jekyll-multisite
+    git clone https://github.com/csware/jekyll-multisite
     cd jekyll-multisite
     gem build jekyll-multisite.gemspec
     gem install jekyll-multisite-<version>.gem
