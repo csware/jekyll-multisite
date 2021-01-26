@@ -10,6 +10,6 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/csware/jekyll-multisite'
   s.license = 'GPL-3.0'
   s.files = ['lib/jekyll-multisite.rb']
-  s.add_runtime_dependency 'jekyll', '>= 3.2', '<= 4.0'
+  s.add_runtime_dependency 'jekyll', '>= 3.2', '< 5'
   s.add_runtime_dependency 'jekyll-paginate', '~> 1.1.0'
 end
