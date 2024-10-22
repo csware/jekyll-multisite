@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   }
   s.license = 'GPL-3.0'
   s.files = ['lib/jekyll-multisite.rb']
+  s.required_ruby_version = ">= 2.0.0"
   s.add_runtime_dependency 'jekyll', '>= 3.2', '< 5'
   s.add_runtime_dependency 'jekyll-paginate', '~> 1.1.0'
 end
