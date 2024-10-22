@@ -1,5 +1,5 @@
 """
-    jekyll-multisite Sumit Khanna - http://penguindreams.org 
+    jekyll-multisite Sumit Khanna - http://penguindreams.org
 
     ---
 
@@ -29,7 +29,7 @@ module Jekyll
 
   class << self
     def sanitized_path(base_directory, questionable_path)
-     
+
      if base_directory.eql?(questionable_path)
        base_directory
      elsif questionable_path.start_with?(base_directory)
@@ -41,7 +41,7 @@ module Jekyll
      else
        File.join(base_directory, questionable_path)
      end
-    
+
     end
   end
 
@@ -57,7 +57,7 @@ module Jekyll
       end
     end
   end
-  
+
   # Shared source reader
 
   class Reader
@@ -65,39 +65,39 @@ module Jekyll
     def read
       @site.layouts = LayoutReader.new(site).read
       read_directories
- 
+
       if @site.config['shared_dir']
         read_directories File.join('..', @site.config['shared_dir'])
       end
-      
+
       sort_files!
       @site.data = DataReader.new(site).read(site.config['data_dir'])
       CollectionReader.new(site).read
     end
-    
+
   end
 
 
   # Move the _shared directories to the correct location
-  #   (very hacky - we move all the files to the correct 
+  #   (very hacky - we move all the files to the correct
   #    location with a hook after the site is written/rendered)
 
   def self.sync_dir(cur, base,  dest)
     Dir.glob( File.join(cur, '*'), File::FNM_DOTMATCH).each do |f|
-      
+
       rel = Pathname.new(f).relative_path_from(base)
       dest_dir = File.join(dest, rel)
-      
+
       if File.basename(f) == '.' or File.basename(f) == '..'
-        next 
+        next
       elsif File.directory?(f)
-	      if not File.exists?(dest_dir)
-	        Dir.mkdir(dest_dir)
-	      end
+          if not File.exists?(dest_dir)
+            Dir.mkdir(dest_dir)
+          end
         sync_dir(f, base, dest)
-	      Dir.rmdir(f)
+          Dir.rmdir(f)
       else
-	      FileUtils.mv(f, dest_dir)
+          FileUtils.mv(f, dest_dir)
       end
     end
   end
@@ -110,10 +110,10 @@ module Jekyll
     base_shared = File.basename(site.config['shared_dir'])
     shared_dir = File.join(site.dest, base_shared)
     static_shared_dir = File.join(Configuration::DEFAULTS['destination'], base_shared)
-    
+
     sync_dir(shared_dir, Pathname.new(shared_dir), site.dest)
     sync_dir(static_shared_dir, Pathname.new(static_shared_dir), site.dest)
-    
+
     Dir.rmdir(shared_dir)
     Dir.rmdir(static_shared_dir)
   end
@@ -140,7 +140,7 @@ module Jekyll
 
   begin
     require "jekyll-paginate"
-    
+
     module Paginate
 
       class Pager
@@ -148,7 +148,7 @@ module Jekyll
           page.name == 'index.html'
         end
       end
-      
+
       class Pagination < Generator
         def paginate(site, page)
           all_posts = site.site_payload['site']['posts']
@@ -159,14 +159,14 @@ module Jekyll
             if num_page > 1
 
               # Here is our monkey patch
-	            if File.basename(page.dir) == site.config['shared_dir']
-	              base = File.expand_path(File.join(site.source, '..'))
+                if File.basename(page.dir) == site.config['shared_dir']
+                  base = File.expand_path(File.join(site.source, '..'))
                 newpage = Page.new(site, base, page.dir, page.name)
               else
-	              newpage = Page.new(site, site.source, page.dir, page.name)
-	            end
+                  newpage = Page.new(site, site.source, page.dir, page.name)
+                end
 
-	            newpage.pager = pager
+                newpage.pager = pager
               newpage.dir = Pager.paginate_path(site, num_page)
               site.pages << newpage
             else
