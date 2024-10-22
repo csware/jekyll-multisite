@@ -1,0 +1,45 @@
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-ruby
+
+name: Release Gem
+
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: "github.repository_owner == 'csware'"
+    name: "Release Gem (Ruby ${{ matrix.ruby_version }})"
+    runs-on: "ubuntu-latest"
+    strategy:
+      fail-fast: true
+      matrix:
+        ruby_version:
+          - 2.0
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@7bae1d00b5db9166f4f0fc47985a3a5702cb58f0
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Build and publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec 
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
+      - name: Store artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gem.zip
+          path: '*.gem'
