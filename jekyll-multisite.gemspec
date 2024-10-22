@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
 
   s.name = 'jekyll-multisite'
-  s.version = '0.5'
-  s.date = '2021-01-26'
+  s.version = '0.5.1' 
+  s.date = '2024-10-22'
   s.summary = 'jekyll-multisite'
   s.description = 'Plugin for multi-site Jekyll configurations'
   s.authors = ['Sven Strickroth', 'Sumit Khanna']
