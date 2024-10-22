@@ -8,6 +8,12 @@ Gem::Specification.new do |s|
   s.authors = ['Sven Strickroth', 'Sumit Khanna']
   s.email = 'email@cs-ware.de'
   s.homepage = 'https://github.com/csware/jekyll-multisite'
+  s.metadata = {
+    "source_code_uri" => s.homepage,
+    "bug_tracker_uri" => "https://github.com/csware/jekyll-multisite/issues",
+    "changelog_uri"   => "https://github.com/csware/jekyll-multisite/releases",
+    "homepage_uri"    => s.homepage,
+  }
   s.license = 'GPL-3.0'
   s.files = ['lib/jekyll-multisite.rb']
   s.add_runtime_dependency 'jekyll', '>= 3.2', '< 5'
